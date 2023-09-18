@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            background-color: palegreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        class Inp extends React.Component {
+            //定义一个名字 调用React.createRef() 将DOM元素存储
+            myRef = React.createRef()
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={this.myRef} />
+                        <button onClick={this.butClick}>按钮</button>
+                    </div>
+                )
+            }
+            butClick = () => {
+                console.log(this.myRef);
+            }
+
+        }
+        ReactDOM.render(<Inp />, document.querySelector("#test"))
+
+    </script>
+
+</body>
+
+</html>

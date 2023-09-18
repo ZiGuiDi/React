@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script src="../js/17.0.1/react.development.js"></script>
+    <script src="../js/17.0.1/react-dom.development.js"></script>
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+        //17+版本即将废弃三个will钩子，新增两个get钩子
+        class Lift extends React.Component {
+
+            add = () => {
+                const { count } = this.state
+                this.setState({ count: count + 1 })
+
+            }
+            update = () => {
+                this.forceUpdate()
+            }
+            constructor(props) {
+                console.log("Lift--constructor");
+                super(props)
+                this.state = {
+                    count: 1
+                }
+            }
+
+            static getDerivedStateFromProps(props, state) {
+                console.log("getDerivedStateFromProps");
+                return null
+            }
+            //组件挂载调用
+            componentDidMount() {
+                console.log("Lift--componentDidMount");
+            }
+            //组件卸载调用
+            componentWillUnmount() {
+                console.log("Lift--componentWillUnmount");
+            }
+            //当setState触发时调用，且需要有返回值 true或false
+            shouldComponentUpdate() {
+                console.log("Lift--shouldComponentUpdate");
+                return true
+            }
+            getSnapshotBeforeUpdate() {
+                console.log("getSnapshotBeforUpdate");
+                return "nihoa"
+            }
+            //页面以及更新触发
+            componentDidUpdate(...a) {
+                console.log(a);
+                console.log("Lift--componentDidUpdate");
+
+            }
+            render() {
+                console.log("Lift--render");
+                const { count } = this.state
+                return (
+                    <div>
+                        <h1 className="title" style={{ opacity: this.state.opacity }}>{count} </h1>
+                        <button onClick={this.add}>点我+1</button>
+                        <button onClick={this.update}>点我强制更新</button>
+                    </div>
+                )
+
+
+            }
+        }
+
+        ReactDOM.render(<Lift name="马车" />, document.querySelector("#main"))
+
+    </script>
+</body>
+
+</html

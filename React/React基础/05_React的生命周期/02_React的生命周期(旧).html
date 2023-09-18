@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+
+        class Lift extends React.Component {
+
+            add = () => {
+                const { count } = this.state
+                this.setState({ count: count + 1 })
+
+            }
+            update = () => {
+                this.forceUpdate()
+            }
+            constructor(props) {
+                console.log("Lift--constructor");
+                super(props)
+                this.state = {
+                    count: 1
+                }
+            }
+            //组件渲染前调用
+            componentWillMount() {
+                console.log("Lift--componentWillMount");
+            }
+            //组件挂载调用
+            componentDidMount() {
+                console.log("Lift--componentDidMount");
+            }
+            //组件卸载调用
+            componentWillUnmount() {
+                console.log("Lift--componentWillUnmount");
+            }
+            //当setState触发时调用，且需要有返回值 true或false
+            shouldComponentUpdate() {
+                console.log("Lift--shouldComponentUpdate");
+                return true
+            }
+            //页面更新前触发
+            componentWillUpdate() {
+                console.log("Lift--componentWillUpdate");
+
+            }
+            //页面以及更新触发
+            componentDidUpdate() {
+                console.log("Lift--componentDidUpdate");
+
+            }
+            render() {
+                console.log("Lift--render");
+                const { count } = this.state
+                return (
+                    <div>
+                        <h1 className="title" style={{ opacity: this.state.opacity }}>{count} </h1>
+                        <button onClick={this.add}>点我+1</button>
+                        <button onClick={this.update}>点我强制更新</button>
+                    </div>
+                )
+
+
+            }
+        }
+        class A extends React.Component {
+            state = {
+                car: "奔驰"
+            }
+            changeCar = () => {
+                const { car } = this.state
+                this.setState({ car: "福特" })
+            }
+            render() {
+                const { car } = this.state
+
+                return (
+
+                    <div>
+                        <h1>我是A组件</h1>
+                        <button onClick={this.changeCar}>换车</button>
+                        <B car={car} />
+                    </div>
+                )
+            }
+        }
+        class B extends React.Component {
+            //当父组件传来的props更新时调用
+            componentWillReceiveProps() {
+                console.log("B--componentWillReceiveProps");
+            }
+            render() {
+                return <h1>我是{this.props.car}</h1>
+            }
+        }
+        ReactDOM.render(<A />, document.querySelector("#main"))
+
+    </script>
+</body>
+
+</html

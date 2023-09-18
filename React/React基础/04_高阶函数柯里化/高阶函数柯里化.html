@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            background-color: palegreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        class Login extends React.Component {
+            state = {
+                username: "",
+                password: ""
+            }
+            handleSubmit = (event) => {
+                event.preventDefault()
+                const { username, password } = this.state
+                alert(username + password)
+
+            }
+            //函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式
+            saveUserInfo = (dataType) => {
+                return (event) => {
+                    this.setState({ [dataType]: event.target.value })
+                }
+            }
+            render() {
+                return <form action="" onSubmit={this.handleSubmit}>
+                    用户名: <input type="text" name="username" onChange={this.saveUserInfo("username")} />
+                    密码:<input type="password" name="password" onChange={this.saveUserInfo("password")} />
+                    <button>登录</button>
+                </form>
+
+            }
+        }
+        ReactDOM.render(<Login />, document.getElementById("test"))
+
+    </script>
+
+</body>
+
+</html>
+
+</html>

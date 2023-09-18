@@ -1,0 +1,19 @@
+.father {
+    width: 500px;
+    background-color: aquamarine;
+    padding: 8px;
+}
+
+.son {
+    width: 100%;
+    background-color: rebeccapurple;
+    padding: 8px;
+
+}
+
+.grandson {
+    width: 100%;
+    background-color: yellowgreen;
+    padding: 8px;
+
+}

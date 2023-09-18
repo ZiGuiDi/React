@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            background-color: palegreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+        //类式组件使用props
+        // class Person extends React.Component {
+        //     constructor(props) {
+        //         super(props)
+        //         //若希望在构造器中接收到props的值，请在构造器中接收到props的值传入super
+        //     }
+        //     //指定props类型
+        //     static propTypes = {
+        //         //指定数据类型以及是否必填
+        //         name: PropTypes.string.isRequired,
+        //         sex: PropTypes.string,
+        //         age: PropTypes.number,
+        //         //若是函数类型，则需是func
+        //         speak: PropTypes.func
+
+        //     }
+        //     //指定props中的属性的默认值
+        //     static defaultProps = {
+        //         sex: "不男不女"
+        //     }
+        //     render() {
+        //         const { name, age, sex } = this.props
+        //         return (
+        //             <ul>
+        //                 <li>姓名：{name}</li>
+        //                 <li>性别：{sex}</li>
+        //                 <li>年龄：{age}</li>
+        //             </ul>
+        //         )
+        //     }
+        // }
+        //函数式组件使用props
+        function Person(props) {
+            const { name, sex, age } = props
+            return (
+                <ul>
+                    <li>姓名：{name}</li>
+                    <li>性别：{sex}</li>
+                    <li>年龄：{age}</li>
+                </ul>
+            )
+        }
+        ReactDOM.render(<Person name="老刘" sex="男" age={18} speak={speak} />, document.querySelector("#test"))
+        function speak() {
+            console.log(13);
+        }
+    </script>
+
+</body>
+
+</html>
+
+</html>

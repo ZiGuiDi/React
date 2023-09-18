@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .new {
+            width: 300px;
+            height: 280px;
+
+            overflow: auto;
+            background-color: aquamarine;
+        }
+
+        .list {
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script src="../js/17.0.1/react.development.js"></script>
+    <script src="../js/17.0.1/react-dom.development.js"></script>
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Lift extends React.Component {
+            state = {
+                newList: []
+            }
+            componentDidMount() {
+
+                setInterval(() => {
+                    const { newList } = this.state
+                    const news = `新闻${newList.length + 1}`
+                    this.setState({ newList: [news, ...newList] })
+
+                }, 1000);
+
+
+            }
+            getSnapshotBeforeUpdate() {
+                // console.log();
+                return this.refs.list.scrollHeight
+            }
+            //页面以及更新触发
+            componentDidUpdate(a, b, h) {
+                this.refs.list.scrollTop += this.refs.list.scrollHeight - h
+            }
+            render() {
+                return (
+                    <div className="new" ref="list">
+                        {this.state.newList.map((n, index) => {
+                            return <div key={index} className="list">{n}</div>
+                        })}
+                    </div>
+
+                )
+
+
+            }
+        }
+
+        ReactDOM.render(<Lift />, document.querySelector("#main"))
+
+    </script>
+</body>
+
+</html

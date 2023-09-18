@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        class Lift extends React.Component {
+            state = {
+                opacity: 1
+            }
+            unload = () => {
+                //unmountComponentAtNode组件卸载
+                ReactDOM.unmountComponentAtNode(document.querySelector("#main"))
+            }
+            //组件挂载调用
+            componentDidMount() {
+                this.timer = setInterval(() => {
+                    let { opacity } = this.state
+                    opacity -= 0.1
+                    if (opacity <= 0) opacity = 1
+                    this.setState({ opacity })
+                }, 200)
+            }
+            //组件卸载调用
+            componentWillUnmount() {
+                clearInterval(this.timer)
+            }
+            render() {
+                return (
+                    <div>
+                        <h1 className="title" style={{ opacity: this.state.opacity }}>React框架 </h1>
+                        <button onClick={this.unload}>卸载</button>
+                    </div>
+                )
+
+
+            }
+        }
+        ReactDOM.render(<Lift />, document.querySelector("#main"))
+
+    </script>
+</body>
+
+</html>
